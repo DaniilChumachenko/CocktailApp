@@ -4,6 +4,8 @@
     tools:context="com.cocktailapp.MainActivity">
     <item
         android:id="@+id/action_settings"
+        android:icon="@drawable/ic_filter_drinks"
         android:title="@string/action_settings"
+        app:showAsAction="always"
          />
 </menu>

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.cocktailapp.R
 import kotlinx.android.synthetic.main.welcome_screen.*
 
-class WelcomeScreen : AppCompatActivity() {
+class WelcomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.welcome_screen)

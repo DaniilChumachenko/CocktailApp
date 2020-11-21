@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,12 +18,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OrdinaryDrinksFragment : Fragment() {
+class ShotDrinksFragment : Fragment() {
 
     lateinit var mService: RequestRetrofit
     lateinit var layoutManager: LinearLayoutManager
     lateinit var adapter: DrinkAdapter
-    lateinit var imageView: ImageView
     private lateinit var viewModel: OrdinaryDrinksViewModel
 
     override fun onCreateView(
@@ -47,7 +45,7 @@ class OrdinaryDrinksFragment : Fragment() {
     }
 
     private fun getAllMovieList() {
-        mService.getDrinkTypeFilter("Ordinary_Drink").enqueue(object : Callback<DrinksArray> {
+        mService.getDrinkTypeFilter("Homemade_Liqueur").enqueue(object : Callback<DrinksArray> {
             override fun onFailure(call: Call<DrinksArray>, t: Throwable) {
             }
             override fun onResponse(call: Call<DrinksArray>, response: Response<DrinksArray>) {
