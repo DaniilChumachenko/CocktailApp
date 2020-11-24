@@ -1,10 +1,10 @@
 package com.cocktailapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,10 +19,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FilterFragment : Fragment() {
 
     lateinit var requestRetrofit: RequestRetrofit
@@ -47,6 +43,7 @@ class FilterFragment : Fragment() {
     private fun getCategoryies() {
         requestRetrofit.getAllCategories("list").enqueue(object : Callback<DrinksArray> {
             override fun onFailure(call: Call<DrinksArray>, t: Throwable) {
+                Log.e(FilterFragment::class.java.simpleName,"getAllCategories request is failed")
             }
 
             override fun onResponse(call: Call<DrinksArray>, response: Response<DrinksArray>) {
