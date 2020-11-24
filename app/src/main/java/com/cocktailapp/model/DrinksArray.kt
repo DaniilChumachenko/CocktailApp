@@ -1,5 +1,5 @@
 package com.cocktailapp.model
 
-class DrinksArray(
-    val drinks: MutableList<Drink>
+data class DrinksArray(
+    val drinks: MutableList<Drink>?
 )

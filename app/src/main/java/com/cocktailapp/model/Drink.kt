@@ -1,7 +1,13 @@
 package com.cocktailapp.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Drink (
-    var strDrink: String? = null,
-    var strDrinkThumb: String? = null,
-    var idDrink: String? = null
+    @SerializedName("strDrink")
+    var nameDrink: String? = null,
+    @SerializedName("strDrinkThumb")
+    var imageDrink: String? = null,
+    var idDrink: String? = null,
+    @SerializedName("strCategory")
+    var categoryDrink: String? = null
 )

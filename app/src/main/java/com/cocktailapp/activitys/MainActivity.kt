@@ -22,27 +22,27 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    var flag: Boolean = false
+    var flagDrinksOrFilters: Boolean = false
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> {
-                return if (!flag) {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.firtdFragment)
-                    flag = true
+                return if (!flagDrinksOrFilters) {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.SecondFragment)
+                    flagDrinksOrFilters = true
                     item.isVisible = false
                     toolbar.setNavigationIcon(R.drawable.ic_back_drinks)
                     toolbar.setNavigationOnClickListener {
                         findNavController(R.id.nav_host_fragment).navigate(R.id.FirstFragment)
-                        flag = false
+                        flagDrinksOrFilters = false
                         item.isVisible = true
                         toolbar.navigationIcon = null
                         toolbar.title = "Drinks"
                     }
                     toolbar.title = "Filters"
-                    flag
+                    flagDrinksOrFilters
                 } else {
-                    flag = false
-                    flag
+                    flagDrinksOrFilters = false
+                    flagDrinksOrFilters
                 }
             }
             else -> super.onOptionsItemSelected(item)

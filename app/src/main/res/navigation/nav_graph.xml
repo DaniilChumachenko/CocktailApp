@@ -7,27 +7,17 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.cocktailapp.fragments.OrdinaryDrinksFragment"
+        android:name="com.cocktailapp.fragments.DrinksFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/ordinary_drinks_fragment">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_drinks"/>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.cocktailapp.fragments.ShotDrinksFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/ordinary_drinks_fragment">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/firtdFragment"
         android:name="com.cocktailapp.fragments.FilterFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" />
+        tools:layout="@layout/fragment_filter" >
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment"
+          />
+    </fragment>
 </navigation>
