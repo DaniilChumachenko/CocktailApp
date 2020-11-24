@@ -1,4 +1,4 @@
-package com.cocktailapp.fragments
+package com.cocktailapp.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cocktailapp.R
-import com.cocktailapp.adapter.СategoryAdapter
+import com.cocktailapp.adapter.CategoryAdapter
 import com.cocktailapp.api.CommonRetrofit
 import com.cocktailapp.api.RequestRetrofit
 import com.cocktailapp.model.Drink
@@ -21,8 +21,8 @@ import retrofit2.Response
 
 class FilterFragment : Fragment() {
 
-    lateinit var requestRetrofit: RequestRetrofit
-    lateinit var categoryAdapter: СategoryAdapter
+    private lateinit var requestRetrofit: RequestRetrofit
+    lateinit var categoryAdapter: CategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +49,7 @@ class FilterFragment : Fragment() {
             override fun onResponse(call: Call<DrinksArray>, response: Response<DrinksArray>) {
                 rv_filter_fragment.setHasFixedSize(true)
                 rv_filter_fragment.layoutManager = LinearLayoutManager(context)
-                categoryAdapter = СategoryAdapter(response.body()?.drinks as List<Drink>)
+                categoryAdapter = CategoryAdapter(response.body()?.drinks as List<Drink>)
                 categoryAdapter.notifyDataSetChanged()
                 rv_filter_fragment.adapter = categoryAdapter
             }

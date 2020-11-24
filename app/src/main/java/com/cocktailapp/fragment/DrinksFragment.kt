@@ -1,4 +1,4 @@
-package com.cocktailapp.fragments
+package com.cocktailapp.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -24,13 +24,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DrinksFragment : Fragment() {
-    lateinit var requestRetrofit: RequestRetrofit
-    lateinit var drinkAdapter: DrinkAdapter
-    lateinit var manager: LinearLayoutManager
-    lateinit var toolbar: Toolbar
-    var drinksList = emptyList<Drink>()
-    var allCategories = emptyList<String>()
-    var isReady: Boolean = false
+    private lateinit var requestRetrofit: RequestRetrofit
+    private lateinit var drinkAdapter: DrinkAdapter
+    private lateinit var manager: LinearLayoutManager
+    private lateinit var toolbar: Toolbar
+    private var drinksList = emptyList<Drink>()
+    private var allCategories = emptyList<String>()
+    private var isReady: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,7 +96,7 @@ class DrinksFragment : Fragment() {
                 Observable.zip(
                     requestRetrofit.getDrinks(it),
                     requestRetrofit.getDrinks("Ordinary_Drink")
-                ) { categories, s ->
+                ) { categories, _ ->
                     return@zip mutableListOf(categories)
                 }.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

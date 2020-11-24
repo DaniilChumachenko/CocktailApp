@@ -9,25 +9,25 @@ import com.cocktailapp.R
 import com.cocktailapp.model.Drink
 
 
-class СategoryViewHolder(itemView: View, var selectedCategories: ArrayList<String>) : RecyclerView.ViewHolder(itemView) {
+class CategoryViewHolder(itemView: View, var selectedCategories: ArrayList<String>) : RecyclerView.ViewHolder(itemView) {
 
     val nameCategory: TextView = itemView.findViewById(R.id.tv_category_name)
-    val statusOfSelect: ImageView = itemView.findViewById(R.id.iv_select_status)
-    val categoryDrinks: ConstraintLayout = itemView.findViewById(R.id.cl_category_field)
+    private val statusOfSelect: ImageView = itemView.findViewById(R.id.iv_select_status)
+    private val categoryDrinks: ConstraintLayout = itemView.findViewById(R.id.cl_category_field)
 
     fun bind(listItem: Drink) {
         categoryDrinks.setOnClickListener {
-            handleClick(listItem, itemView)
+            handleClick(listItem)
         }
     }
-    private fun handleClick(category: Drink, itemView: View) {
+    private fun handleClick(category: Drink) {
         with(statusOfSelect) {
             if (visibility == View.INVISIBLE) {
                 visibility = View.VISIBLE
                 category.categoryDrink?.let { selectedCategories.add(it) }
             } else {
                 visibility = View.INVISIBLE
-                selectedCategories.remove(category)
+                selectedCategories.remove(category.categoryDrink)
             }
         }
     }

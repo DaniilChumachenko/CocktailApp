@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.cocktailapp.fragments.DrinksFragment"
+        android:name="com.cocktailapp.fragment.DrinksFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_drinks"/>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.cocktailapp.fragments.FilterFragment"
+        android:name="com.cocktailapp.fragment.FilterFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_filter" >
         <action

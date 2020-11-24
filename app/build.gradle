@@ -59,5 +59,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     // Paging
-    implementation "android.arch.paging:runtime:1.0.0"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
+
+    implementation 'com.google.android.material:material:1.2.1'
 }

@@ -11,7 +11,7 @@ import com.cocktailapp.model.Drink
 
 
 class DrinkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val linearLayout: ConstraintLayout = itemView.findViewById(R.id.linearLayout)
+    private val linearLayout: ConstraintLayout = itemView.findViewById(R.id.cl_item)
     val drinkImage: ImageView = itemView.findViewById(R.id.iv_drink_image)
     val drinkName: TextView = itemView.findViewById(R.id.tv_drink_name)
 
