@@ -9,7 +9,7 @@ import com.cocktailapp.R
 import com.cocktailapp.model.Drink
 
 
-class CategoryViewHolder(itemView: View, var selectedCategories: ArrayList<String>) : RecyclerView.ViewHolder(itemView) {
+class FilterViewHolder(itemView: View, var selectedCategories: ArrayList<String>) : RecyclerView.ViewHolder(itemView) {
 
     val nameCategory: TextView = itemView.findViewById(R.id.tv_category_name)
     private val statusOfSelect: ImageView = itemView.findViewById(R.id.iv_select_status)

@@ -1,36 +1,23 @@
 package com.cocktailapp.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cocktailapp.R
 import com.cocktailapp.adapter.DrinkAdapter
-import com.cocktailapp.api.CommonRetrofit
-import com.cocktailapp.api.RequestRetrofit
-import com.cocktailapp.model.Drink
-import com.cocktailapp.model.DrinksArray
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.cocktailapp.viewmodel.DrinkViewModel
 import kotlinx.android.synthetic.main.fragment_drinks.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DrinksFragment : Fragment() {
-    private lateinit var requestRetrofit: RequestRetrofit
     private lateinit var drinkAdapter: DrinkAdapter
-    private lateinit var manager: LinearLayoutManager
     private lateinit var toolbar: Toolbar
-    private var drinksList = emptyList<Drink>()
-    private var allCategories = emptyList<String>()
-    private var isReady: Boolean = false
+    private lateinit var viewModel: DrinkViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,20 +28,17 @@ class DrinksFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        requestRetrofit = CommonRetrofit.requestRetrofitService
-        manager = LinearLayoutManager(context)
-        rv_drinks_fragment.setHasFixedSize(true)
-        rv_drinks_fragment.layoutManager = manager
-        toolbar = requireActivity().findViewById(R.id.toolbar)
-        toolbar.navigationIcon = null
-        setHasOptionsMenu(true)
-        toolbar.setNavigationOnClickListener {
-            findNavController().navigate(R.id.SecondFragment)
+        with(rv_drinks_fragment) {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
         }
+        viewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
+        changeToolbar()
+        initObservers()
         with(arguments?.getStringArrayList("categories")) {
             if (this?.size == null) {
                 toolbar.title = "All Drinks"
-                getCategoryies()
+                viewModel.getCategories()
             } else {
                 when (this.size) {
                     1 -> toolbar.title = this[0]
@@ -64,57 +48,25 @@ class DrinksFragment : Fragment() {
                         this[0] + ", " + this[1] + ", " + this[2] + ", " + this[3] + " ... "
                     else -> toolbar.title = "Drinks by selected filters"
                 }
-                getAllDataByFilter(this)
+                viewModel.getAllDataByFilter(this)
             }
         }
     }
 
-    private fun getCategoryies() {
-        requestRetrofit.getAllCategories("list").enqueue(object : Callback<DrinksArray> {
-            override fun onFailure(call: Call<DrinksArray>, t: Throwable) {
-                Log.e(DrinksFragment::class.java.simpleName, "getAllCategories request is failed")
-            }
-
-            override fun onResponse(call: Call<DrinksArray>, response: Response<DrinksArray>) {
-                addAllDrinks(response.body()?.drinks as List<Drink>)
-            }
-        })
-
-    }
-
-    private fun addAllDrinks(list: List<Drink>?) {
-        if (list != null) {
-            for (it in list)
-                allCategories = allCategories.plus(it.categoryDrink!!)
-        }
-        getAllDataByFilter(allCategories as ArrayList<String>)
-    }
-
-    private fun getAllDataByFilter(stringArrayList: ArrayList<String>?) {
-        if (stringArrayList != null) {
-            for (it in stringArrayList) {
-                Observable.zip(
-                    requestRetrofit.getDrinks(it),
-                    requestRetrofit.getDrinks("Ordinary_Drink")
-                ) { categories, _ ->
-                    return@zip mutableListOf(categories)
-                }.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe {
-                        addDrinksToList(it)
-                    }.isDisposed
-            }
-            isReady = true
+    private fun changeToolbar() {
+        toolbar = requireActivity().findViewById(R.id.toolbar)
+        toolbar.navigationIcon = null
+        setHasOptionsMenu(true)
+        toolbar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.SecondFragment)
         }
     }
 
-    private fun addDrinksToList(list: MutableList<DrinksArray>) {
-        for (it in list)
-            drinksList = drinksList.plus(it.drinks!!)
-        if (isReady) {
-            drinkAdapter = DrinkAdapter(drinksList)
+    private fun initObservers() = viewModel.apply {
+        drinksListToFragment.observe(viewLifecycleOwner, {
+            drinkAdapter = DrinkAdapter(it)
             drinkAdapter.notifyDataSetChanged()
             rv_drinks_fragment.adapter = drinkAdapter
-        }
+        })
     }
 }
