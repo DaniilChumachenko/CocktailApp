@@ -1,6 +1,8 @@
 package com.cocktailapp.adapter
 
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -22,11 +24,11 @@ class FilterViewHolder(itemView: View, var selectedCategories: ArrayList<String>
     }
     private fun handleClick(category: Drink) {
         with(statusOfSelect) {
-            if (visibility == View.INVISIBLE) {
-                visibility = View.VISIBLE
+            if (visibility == INVISIBLE) {
+                visibility = VISIBLE
                 category.categoryDrink?.let { selectedCategories.add(it) }
             } else {
-                visibility = View.INVISIBLE
+                visibility = INVISIBLE
                 selectedCategories.remove(category.categoryDrink)
             }
         }

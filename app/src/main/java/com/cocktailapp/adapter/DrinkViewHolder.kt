@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.cocktailapp.R
@@ -17,7 +18,7 @@ class DrinkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(listItem: Drink) {
         linearLayout.setOnClickListener {
-            Toast.makeText(it.context, listItem.nameDrink.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(it.context, listItem.nameDrink.toString(), LENGTH_SHORT).show()
         }
     }
 }
