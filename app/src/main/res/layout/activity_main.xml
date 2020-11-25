@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/Theme.CocktailApp.PopupOverlay"
-            app:title="Drinks" />
+            app:title="@string/all_drinks" />
 
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity() {
                         flagDrinksOrFilters = false
                         item.isVisible = true
                         toolbar.navigationIcon = null
-                        toolbar.title = "Drinks"
+                        toolbar.title = resources.getString(R.string.drinks)
                     }
-                    toolbar.title = "Filters"
+                    toolbar.title = resources.getString(R.string.filters)
                     flagDrinksOrFilters
                 } else {
                     flagDrinksOrFilters = false
@@ -47,5 +47,4 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

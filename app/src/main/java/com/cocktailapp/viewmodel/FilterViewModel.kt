@@ -20,7 +20,7 @@ class FilterViewModel: ViewModel() {
 
     val categoriesListToFragment: LiveData<List<Drink>> = _categoriesListToFragment
 
-    fun getCategoryies() {
+    fun getCategories() {
         requestRetrofit.getAllCategories("list").enqueue(object : Callback<DrinksArray> {
             override fun onFailure(call: Call<DrinksArray>, t: Throwable) {
                 Log.e(FilterFragment::class.java.simpleName,"getAllCategories request is failed")

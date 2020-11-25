@@ -30,10 +30,9 @@ class FilterFragment : Fragment() {
         rv_filter_fragment.setHasFixedSize(true)
         rv_filter_fragment.layoutManager = LinearLayoutManager(context)
         initObservers()
-        viewModel.getCategoryies()
+        viewModel.getCategories()
         val bundle = Bundle()
         bt_apply_filter.setOnClickListener {
-
             bundle.putStringArrayList("categories", filterAdapter.selectedCategories)
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment,bundle )
         }

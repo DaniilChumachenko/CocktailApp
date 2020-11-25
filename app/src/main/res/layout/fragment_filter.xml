@@ -19,7 +19,7 @@
         android:id="@+id/bt_apply_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="27dp"
+        android:layout_margin="@dimen/dt_apply_margin"
         android:background="@color/black"
         android:text="@string/fragment_filter_bt_apply"
         android:textColor="@color/white"

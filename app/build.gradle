@@ -37,6 +37,7 @@ dependencies {
     apply plugin: 'kotlin-android'
     apply plugin: 'kotlin-android-extensions'
 
+    //Android X
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"

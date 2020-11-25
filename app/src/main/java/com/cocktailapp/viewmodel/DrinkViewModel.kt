@@ -18,7 +18,6 @@ import retrofit2.Response
 
 class DrinkViewModel : ViewModel() {
 
-
     private var requestRetrofit: RequestRetrofit = CommonRetrofit.requestRetrofitService
 
     private var drinksList = emptyList<Drink>()
@@ -30,7 +29,6 @@ class DrinkViewModel : ViewModel() {
     val drinksListToFragment: LiveData<List<Drink>> = _drinksListToFragment
 
     private var isReady: Boolean = false
-
 
     fun getCategories() {
         requestRetrofit.getAllCategories("list").enqueue(object : Callback<DrinksArray> {
@@ -77,5 +75,4 @@ class DrinkViewModel : ViewModel() {
             _drinksListToFragment.value = drinksList
         }
     }
-
 }
